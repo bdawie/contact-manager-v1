@@ -1,0 +1,49 @@
+<div 
+  *ngIf="isContactDeleted" 
+  class="
+    contact-deleted-alert 
+    alert 
+    alert-success 
+    alert-dismissable 
+    fade in"
+  >
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <p><em>Contact deleted successfuly!</em></p>
+</div>
+<div *ngFor="let contact of contacts" class="panel panel-default">
+  <div class="wrapper-panel-body" >
+    <div class="name-info">
+      <p> 
+        <img 
+            class="img-rounded"
+            [src]="contact.pictureUrl" 
+            alt="Contact photo" 
+            height="30px" 
+            width="30px"
+          > {{contact.firstName }} {{contact.lastName}}
+      </p>
+    </div>
+    <div class="phoneNumber-info">
+      <p>{{contact.phoneNumber}}</p>
+    </div>
+    <div class="email-info">
+       <p>{{contact.email}}</p>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <div class="contact-options">
+      <ul>
+        <li class="options"><span title="Edit Contact" class="glyphicon glyphicon-pencil"   (click)="onContactEdit(contact)"></span></li>
+        <li class="dropdown options ">
+          <span title="More Actions" class="glyphicon glyphicon-option-vertical dropdown-toggle"  data-toggle="dropdown"></span>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li><a role="button" (click)="onContactDelete(contact)"><i class="fa fa-trash-o fa-fw"></i>Delete</a></li>
+          </ul>
+        </li>   
+      </ul>
+    </div>
+  </div>
+</div>
+<div *ngIf="selectedContact" class="row">
+  <app-contact [contact] ="selectedContact"></app-contact>
+</div>

@@ -1,0 +1,63 @@
+<header class="main-header">
+  <div class="main-header-navigation">
+    <app-shared>
+      <div class="main-header-wrapper">
+        <div class="navbar-header contacts-brand">
+          <a ><img class="navbar-brand" src="assets/images/ContactsPro.png"></a>
+        </div>
+        <div class="contacts-search-input">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>                
+              <input 
+                #contactSearch 
+                id="contactsSearchInput" 
+                (keyup)="search(contactSearch.value)" 
+                type="search" 
+                class="form-control input-lg"  
+                placeholder="Search" 
+                aria-describedby="search-input">
+            </div>    
+            <ul class="search-result">
+            <li *ngFor="let contact of contacts$ | async" >
+              <a (click)="onSearchedContactClick(contact)" >{{contact.firstName}} {{contact.lastName}}</a>
+            </li>
+          </ul>
+          </div>  
+        <div class="current-user-info">
+          <div class="current-user-options dropdown">
+            <a 
+              role="button" 
+              class="dropdown-toggle" 
+              data-toggle="dropdown">
+              <i class="fa fa-user fa-fw" aria-hidden="true"></i>
+              {{fisrtName}} {{lastName}}
+              <span class="caret"></span>
+            </a>
+            <ul class="current-user-options-dropdown dropdown-menu dropdown-menu-right">
+              <li ><a role="button" (click)="onLogout()"><i class="glyphicon glyphicon-log-out" ></i> Log out</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </app-shared>    
+  </div>
+</header>
+
+<div class="contacts">
+  <div>
+    <p class="loading-spinner"*ngIf="isLoading"><i class="fa fa-spinner fa-spin"></i></p>
+    <app-contact-list [contacts]="contacts"></app-contact-list>
+  </div>
+</div>
+
+<div class="create-contact-btn">
+  <i class="fa fa-plus-square-o" title="Create new contact" (click)="onCreateClick()"></i>
+</div>
+
+<div class="create-contact-modal">
+  <app-contact-create></app-contact-create>
+</div>
+
+<div *ngIf="selectedSearchContact" class="row">
+  <app-contact-search-edit [searchedContact]="selectedSearchContact"></app-contact-search-edit>
+</div>

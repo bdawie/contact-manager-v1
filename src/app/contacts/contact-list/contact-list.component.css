@@ -1,0 +1,42 @@
+.panel{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 10px;
+    cursor: pointer;
+}
+.wrapper-panel-body {
+    display: grid;
+    grid-template-columns: 200px  100px 100px;
+    grid-gap: 10em;
+    align-items: center;
+
+}
+.email-info{
+    align-self: center;
+    justify-self: center;
+}
+.panel-footer{
+    grid-column-start: 3;
+}
+
+.contact-options ul{
+    list-style: none;
+}
+.options{
+    display: inline;
+    margin: 10px;
+}
+
+.glyphicon{
+    color:rgba(43, 42, 44, 0.7);
+    font-size: 20px;
+}
+.glyphicon:hover{
+    color: rgba(131, 18, 236, 0.8);
+}
+.contact-deleted-alert{
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
+    width: 800px;
+}

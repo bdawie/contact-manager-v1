@@ -1,0 +1,54 @@
+<div class="wrapper">
+  <div *ngIf="userCreated" class="signup-success alert alert-success alert-dismissable fade in">
+    <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <p><em>User created successfuly! Now sign in to continue!</em></p>
+  </div>
+  <div *ngIf="signupFailed" class="signup-failed alert alert-danger alert-dismissable fade in">
+    <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <p><em>Sign up failed! Invalid email or password!</em></p>
+  </div>
+  <div class="sign-up-container">
+    <article> 
+      <h3>Or Sign up</h3>
+      <p>Get started - control your network!</p>
+    </article>
+    <form class="singup-form" [formGroup]="signupFormGroup" (ngSubmit)="onSignup()" novalidate >
+      <div class="form-group">
+        <label for="firstName">First name</label>
+        <input 
+          type="text" 
+          id="firstName" 
+          class="form-control" 
+          formControlName="firstName">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last name</label>
+        <input 
+          type="text" 
+          id="lastName" 
+          class="form-control" 
+          formControlName="lastName">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          class="form-control" 
+          formControlName="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password (8 or more characters)</label>
+        <input 
+          type="password" 
+          id="password" 
+          class="form-control" 
+          formControlName="password">
+      </div>
+      <div class="signup-btn">
+          <button type="submit" class="btn btn-primary">Done!</button>
+      </div>
+      
+    </form>
+  </div>
+</div>

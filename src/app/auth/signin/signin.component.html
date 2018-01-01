@@ -1,0 +1,32 @@
+<div class="signin-container">
+  <nav class="nav navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand"><img src="assets/images/ContactsPro.png" ></a>
+      </div>
+      <form 
+        class="navbar-form navbar-right signin-form"
+        [formGroup]="signinFormGroup"
+        (ngSubmit)="onSignin()"
+        novalidate>
+        <div *ngIf="loginFailed" class="form-group">
+          <label [ngStyle]="{color:'red'}">Invalid sign in credentials!</label>
+        </div>
+        <div class="form-group">
+          <input 
+            type="email" 
+            class="form-control" 
+            placeholder="email"
+            formControlName="email">
+          <input 
+            type="password" 
+            class="form-control" 
+            placeholder="password"
+            formControlName="password">
+        </div>
+        <button class="btn btn-info" type="submit">Sign in</button>
+        <a href="#">Forgot password?</a>
+      </form>
+    </div>
+  </nav>
+</div>

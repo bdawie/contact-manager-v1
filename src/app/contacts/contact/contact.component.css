@@ -1,0 +1,33 @@
+
+#email.ng-dirty.ng-invalid{
+    border-left: solid 5px red;
+}
+#email.ng-dirty.ng-valid{
+    border-left: solid 5px green;
+}
+.modal{
+    background-color: rgba(163, 158, 158, 0.6);
+}
+.modal-content{
+    position: relative;
+    top: 70px;
+    /* left:-30px; */
+    margin: auto;
+    max-width: 700px;
+    overflow-x: auto;
+    
+}
+.modal-header{
+    position: sticky;
+    top: 0;
+}
+.modal-body{
+    max-height: 400px;
+    overflow-y: scroll; 
+}
+.contact-photo-edit-input >label{
+    cursor: pointer
+}
+.contact-photo-edit-input > input{
+    display: none;
+}
