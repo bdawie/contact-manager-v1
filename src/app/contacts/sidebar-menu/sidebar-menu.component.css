@@ -1,0 +1,10 @@
+.dropdown-menu{
+    width: 200px;
+    border: none;
+    border-right: solid 2px rgb(138, 125, 156);
+    border-radius: 0%;
+    cursor: pointer;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 10px;
+    }

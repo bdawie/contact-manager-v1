@@ -18,6 +18,7 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { LogoutComponent } from './auth/logout/logout.component';
 import { routing } from './app.routing';
 import { ContactSearchEditComponent } from './contacts/contact-search-edit/contact-search-edit.component';
+import { SidebarMenuComponent } from './contacts/sidebar-menu/sidebar-menu.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ContactSearchEditComponent } from './contacts/contact-search-edit/conta
     AuthComponent,
     SigninComponent,
     LogoutComponent,
-    ContactSearchEditComponent
+    ContactSearchEditComponent,
+    SidebarMenuComponent
   ],
   imports: [
     BrowserModule,

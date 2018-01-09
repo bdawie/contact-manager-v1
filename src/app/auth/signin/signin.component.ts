@@ -51,9 +51,7 @@ export class SigninComponent implements OnInit {
         localStorage.setItem('userId',data.user['_id']);
         localStorage.setItem('fName',data.user.firstName);
         localStorage.setItem('lName',data.user.lastName);
-        location.reload();
-        this.router.navigateByUrl('/home');
-        
+
       },(err:HttpErrorResponse)=>{
         this.loginFailed=true;
         if(err instanceof Error){
@@ -62,6 +60,8 @@ export class SigninComponent implements OnInit {
         else{
           console.log(`Backend error. Status code ${err.status}. error body ${err.message}`);
       } 
+      },()=>{
+        this.router.navigateByUrl('/home');
       });
   }
-}
+} 

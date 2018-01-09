@@ -11,13 +11,6 @@ export class AppComponent implements OnInit{
   constructor(){}
 
   ngOnInit(){
-    this.contactCreateComponent = new ContactCreateComponent(null);
     
-  }
-
-
-  onCreateClick(){
-    console.log('hi');
-    this.contactCreateComponent.openModal();   
   }
 }

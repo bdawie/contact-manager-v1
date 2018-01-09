@@ -1,297 +1,191 @@
 <div class="col-md-8">
-    <div  class="modal fade"  
+  <div class="modal fade"  
     id="createContactModal" 
     tabindex="-1" 
     role="dialog" 
     aria-labelledby="createContactLabel"
-    >
-    <div class="row modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div>
-              <button type="button" class="close" (click)="onCreateModalClose()" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="createContactLabel">Create new contact</h4>
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <form class="col-sm-12" [formGroup]="createContactForm" (ngSubmit)="onCreateSubmit()" novalidate >
-              <div class="row">
-                <div class="col-xs-10">
-                  <div class="row">
-                    <div class="form-group col-xs-6" >
-                      <label for="createFirstNameInput">First Name</label>
-                        <input 
-                          type="text" 
-                          id="createFirstNameInput"
-                          class="form-control"
-                          formControlName="firstName"
-                        >
-                    </div>
-                    <div class="form-group col-xs-6">
-                      <label for="createLastNameInput">Last Name</label>
-                        <input 
-                          type="text" 
-                          id="createLastNameInput"
-                          class="form-control"
-                          formControlName="lastName"
-                          >
-                    </div>
-                  </div>
-                  </div>
-                  <div class="col-xs-2">
-                    <div class="contact-photo">
-                        <label for="contactPhotoCreateInput" title="Set contact photo">
-                            <img id="contactPhotoCreateImg" 
-                            src="http://ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png"
-                            class=" img-circle pull-right"
-                            style="width:60px; height:60px; margin-top:15px;" 
-                            alt="Set contact photo">
-                        </label>
-                        <input 
-                        #contactPhotoCreateInput 
-                        id="contactPhotoCreateInput" 
-                        type="file" 
-                        name="contactPhotoEditInput" 
-                        (change)="onPhotoChange(contactPhotoCreateInput)"
-                        > 
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label for="createPhoneNumberInput">Phone Number</label>
-                        <input 
-                          type="text" 
-                          id="createPhoneNumberInput" 
-                          class="form-control"
-                          formControlName="phoneNumber"
-                        >
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label for="createEmailInput">Email</label>
-                        <input 
-                          type="email" 
-                          id="createEmailInput" 
-                          class="form-control"
-                          formControlName="email"
-                        >
-                    </div>
-                  </div>
-                </div>  
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label for="createBirthdayInput">Birthday</label>
-                        <input 
-                          type="date" 
-                          id="createBirthdayInput" 
-                          class="form-control"
-                          formControlName="birthday"
-                        >
-                    </div>
-                  </div>
-                </div>  
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label for="createRelationshipInput">Relationship</label>
-                        <input 
-                          type="text" 
-                          id="createRelationshipInput" 
-                          class="form-control"
-                          formControlName="relationship"
-                        >
-                    </div>
-                  </div>
-                </div>  
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label for="createJobTitleInput">Job Title</label>
-                        <input 
-                          type="text" 
-                          id="createJobTitleInput" 
-                          class="form-control"
-                          formControlName="jobTitle"
-                        >
-                    </div>
-                  </div>
-                </div>  
-                 
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label for="createWebsiteInput">Website</label>
-                        <input 
-                          type="text" 
-                          id="createWebsiteInput" 
-                          class="form-control"
-                          formControlName="website"
-                        > 
-                    </div>
-                  </div>
-                </div> 
-                <div class="row">
-                    <div class="col-sm-12">
-                      <div class="form-group">
-                        <label for="createAddressInput">Address</label>
-                          <textarea 
-                            id="createAddressInput" 
-                            class="form-control"
-                            formControlName="address"
-                          >
-                          </textarea> 
-                      </div>
-                    </div>
-                  </div>  
-                <div class="row">
-                  <div class="col-sm-12">
-                    <div class="form-group">
-                      <label for="createNotesInput">Notes</label>
-                        <textarea 
-                          id="createNotesInput" 
-                          class="form-control"
-                          formControlName="notes"
-                        >
-                      </textarea>  
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" (click)="onCreateModalClose()" data-dismiss="modal" >Close</button>
-                    <button type="button" class="btn btn-primary" type="submit" [disabled]="createContactForm.pristine && !createContactForm.valid"><span *ngIf="!isLoading">Save changes</span> <span *ngIf="isLoading"><i class="fa fa-spinner fa-spin"></i></span> </button>
-                </div>  
-            </form>
-          </div>
-        </div>      
-      </div>
-    </div>
-    </div>
-  </div>
-    
-     
- 
- 
- <!-- Here original -->
- <!-- <div class="modal fade" id="createContactModal" tabindex="-1" role="dialog" aria-labelledby="createContactLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  >
+  <div class="row modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <button type="button" class="close" (click)="onCreateModalClose()" data-dismiss="modal"  aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="createContactLabel">Create new contact</h4>
         </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-xs-12">
-              <form [formGroup]="createContactForm" (ngSubmit)="onCreateSubmit()">
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <form class="col-sm-12" [formGroup]="createContactForm" (ngSubmit)="onCreateSubmit()" novalidate >
+            <div class="row">
+              <div class="col-xs-10">
                 <div class="row">
-                    <div class="col-xs-10">
-                        <fieldset formGroupName="name" class="row">
-                                <div class="form-group col-xs-6" >
-                                    <label for="firstName">First Name</label>
-                                    <input 
-                                      type="text" 
-                                      id="firstName"
-                                      class="form-control"
-                                      formControlName="firstName">
-                                </div>
-                                <div class="form-group col-xs-6">
-                                  <label for="lastName">Last Name</label>
-                                    <input 
-                                       type="text" 
-                                       id="lastName"
-                                       class="form-control"
-                                       formControlName="lastName">
-                                  </div>
-                            </fieldset>
-                        </div>
-                  <div class="col-xs-2 ">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Default_profile_picture_%28male%29_on_Facebook.jpg/480px-Default_profile_picture_%28male%29_on_Facebook.jpg"
-                         class="img-responsive img-rounded pull-right"
-                         style="max-width:40px; max-height:40px; margin-top:15px;" 
-                         alt="Set contact photo">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="phoneNumber">Phone Number</label>
-                  <input 
-                    type="text" 
-                    id="phoneNumber" 
-                    class="form-control"
-                    formControlName="phoneNumber">
-                </div>
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    class="form-control"
-                    formControlName="email">
-                </div>
-                <div class="form-group">
-                  <label for="birthday">Birthday</label>
-                  <input 
-                    type="date" 
-                    id="birthday" 
-                    class="form-control"
-                    formControlName="birthday">
-                </div>
-                <div class="form-group">
-                  <label for="relationship">Relationship</label>
-                  <input 
-                    type="text" 
-                    id="relationship" 
-                    class="form-control"
-                    formControlName="relationship">
-                </div>
-                <div class="form-group">
-                  <label for="jobTitle">Job Title</label>
-                  <input 
-                    type="text" 
-                    id="jobTitle" 
-                    class="form-control"
-                    formControlName="jobTitle">
-                </div>
-                <div class="form-group">
-                  <label for="address">Address</label>
-                  <textarea 
-                    id="address" 
-                    class="form-control"
-                    formControlName="address">
-                  </textarea>  
-                </div>
-                <div class="form-group">
-                    <label for="address">Website</label>
+                  <div class="form-group col-xs-6" >
+                    <label for="createFirstNameInput">First Name</label>
                     <input 
                       type="text" 
-                      id="website" 
+                      id="createFirstNameInput"
                       class="form-control"
-                      formControlName="website">
+                      formControlName="firstName"
+                    >
                   </div>
+                  <div class="form-group col-xs-6">
+                    <label for="createLastNameInput">Last Name</label>
+                    <input 
+                      type="text" 
+                      id="createLastNameInput"
+                      class="form-control"
+                      formControlName="lastName"
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-2">
+                <div class="contact-photo">
+                  <label
+                    for="contactPhotoCreateInput" 
+                    title="Set contact photo">
+                  <img
+                    id="contactPhotoCreateImg" 
+                    src="http://ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png"
+                    class=" img-circle pull-right"
+                    style="width:60px; height:60px; margin-top:15px;" 
+                    alt="Set contact photo">
+                  </label>
+                  <input 
+                    #contactPhotoCreateInput 
+                    id="contactPhotoCreateInput" 
+                    type="file" 
+                    name="contactPhotoEditInput" 
+                    (change)="onPhotoChange(contactPhotoCreateInput)"
+                  > 
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
                 <div class="form-group">
-                  <label for="notes">Notes</label>
-                  <textarea 
-                    id="notes" 
+                  <label
+                    for="createPhoneNumberInput">Phone Number
+                  </label>
+                  <input 
+                    type="text" 
+                    id="createPhoneNumberInput" 
                     class="form-control"
-                    formControlName="notes">
+                    formControlName="phoneNumber"
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="createEmailInput">Email</label>
+                  <input 
+                    type="email" 
+                    id="createEmailInput" 
+                    class="form-control"
+                    formControlName="email"
+                  >
+                </div>
+              </div>
+            </div>  
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="createBirthdayInput">Birthday</label>
+                  <input 
+                    type="date" 
+                    id="createBirthdayInput" 
+                    class="form-control"
+                    formControlName="birthday"
+                  >
+                </div>
+              </div>
+            </div>  
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="createRelationshipInput">Relationship</label>
+                  <input 
+                    type="text" 
+                    id="createRelationshipInput" 
+                    class="form-control"
+                    formControlName="relationship"
+                  >
+                </div>
+              </div>
+            </div>  
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="createJobTitleInput">Job Title</label>
+                  <input 
+                    type="text" 
+                    id="createJobTitleInput" 
+                    class="form-control"
+                    formControlName="jobTitle"
+                  >
+                </div>
+              </div>
+            </div>  
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="createWebsiteInput">Website</label>
+                  <input 
+                    type="text" 
+                    id="createWebsiteInput" 
+                    class="form-control"
+                    formControlName="website"
+                  > 
+                </div>
+              </div>
+            </div> 
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="createAddressInput">Address</label>
+                  <textarea 
+                    id="createAddressInput" 
+                    class="form-control"
+                    formControlName="address"
+                    >
+                  </textarea> 
+                </div>
+              </div>
+            </div>  
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="createNotesInput">Notes</label>
+                  <textarea 
+                    id="createNotesInput" 
+                    class="form-control"
+                    formControlName="notes"
+                  >
                   </textarea>  
                 </div>
-                
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" type="submit" [disabled]="!createContactForm.valid">Save changes</button>
-                </div>
-              </form>
+              </div>
             </div>
-          </div>      
+            <div class="footer-section">
+              <div class="modal-footer-options ">
+                <button type="button" class="btn btn-default" (click)="onCreateModalClose()" data-dismiss="modal" >Cancel</button>
+                <button  class="btn btn-primary" type="submit" [disabled]="!createContactForm.valid"><span *ngIf="!isLoading">Create</span> <span *ngIf="isLoading"><i class="fa fa-spinner fa-spin"></i></span> </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
+  <div 
+    *ngIf="createdContact" 
+    class="contact-created 
+      alert 
+      alert-success 
+      fade in">
+    <p><em>New contact created!</em></p>
+  </div>
+</div>
 
+</div>

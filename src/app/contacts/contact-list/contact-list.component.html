@@ -4,24 +4,36 @@
     contact-deleted-alert 
     alert 
     alert-success 
-    alert-dismissable 
     fade in"
-  >
-  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <p><em>Contact deleted successfuly!</em></p>
+>
+  <p><em>Contact deleted successfully!</em></p>
 </div>
-<div *ngFor="let contact of contacts" class="panel panel-default">
-  <div class="wrapper-panel-body" >
-    <div class="name-info">
-      <p> 
-        <img 
+
+
+<div *ngFor="let contact of contacts" class="contact-info-wrapper">
+  <div class="wrapper-info-body" >
+    <div class="name-image-info">
+      <div class="contact-name-image-wrapper">
+        <div class="contact-image">
+            <img *ngIf="contact.pictureUrl === null || contact.pictureUrl === '' "
+            class="img-rounded"
+            src="http://ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png" 
+            alt="Contact photo" 
+            height="60px" 
+            width="60px"
+          > 
+          <img *ngIf="contact.pictureUrl"
             class="img-rounded"
             [src]="contact.pictureUrl" 
             alt="Contact photo" 
-            height="30px" 
-            width="30px"
-          > {{contact.firstName }} {{contact.lastName}}
-      </p>
+            height="60px" 
+            width="60px"
+          > 
+        </div>
+        <div class="contact-name">
+          {{contact.firstName }} {{contact.lastName}}
+        </div>
+      </div>
     </div>
     <div class="phoneNumber-info">
       <p>{{contact.phoneNumber}}</p>
@@ -29,21 +41,49 @@
     <div class="email-info">
        <p>{{contact.email}}</p>
     </div>
-  </div>
-  <div class="panel-footer">
-    <div class="contact-options">
-      <ul>
-        <li class="options"><span title="Edit Contact" class="glyphicon glyphicon-pencil"   (click)="onContactEdit(contact)"></span></li>
-        <li class="dropdown options ">
-          <span title="More Actions" class="glyphicon glyphicon-option-vertical dropdown-toggle"  data-toggle="dropdown"></span>
+    <div class="contact-options-list">
+        <div> 
+          <span 
+            title="Edit Contact" 
+            class="glyphicon glyphicon-pencil" 
+            (click)="onContactEdit(contact)">
+          </span>
+        </div>
+        <div class="dropdown">
+          <span 
+            title="More Actions" 
+            class="glyphicon glyphicon-option-vertical dropdown-toggle"  
+            data-toggle="dropdown">
+          </span>
           <ul class="dropdown-menu dropdown-menu-right">
             <li><a role="button" (click)="onContactDelete(contact)"><i class="fa fa-trash-o fa-fw"></i>Delete</a></li>
           </ul>
-        </li>   
-      </ul>
-    </div>
+        </div>
+      </div>
   </div>
+  <!-- <div class="wrapper-info-footer">
+    <div class="contact-options-list">
+      <div> 
+        <span 
+          title="Edit Contact" 
+          class="glyphicon glyphicon-pencil" 
+          (click)="onContactEdit(contact)">
+        </span>
+      </div>
+      <div class="dropdown">
+        <span 
+          title="More Actions" 
+          class="glyphicon glyphicon-option-vertical dropdown-toggle"  
+          data-toggle="dropdown">
+        </span>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a role="button" (click)="onContactDelete(contact)"><i class="fa fa-trash-o fa-fw"></i>Delete</a></li>
+        </ul>
+      </div>
+    </div>
+  </div> -->
 </div>
+
 <div *ngIf="selectedContact" class="row">
   <app-contact [contact] ="selectedContact"></app-contact>
 </div>

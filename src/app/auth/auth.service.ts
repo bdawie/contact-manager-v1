@@ -1,3 +1,4 @@
+import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Injectable } from "@angular/core";
 import {HttpClient,HttpHeaders} from "@angular/common/http";
@@ -27,12 +28,15 @@ export class AuthService{
         return this.httpClient.post<UserResponse>(
             'http://localhost:3000/user/signin',
              body,
-             {headers:this.headers});
+             {headers:this.headers}).pipe(
+                tap(data=>{
+                     location.reload();
+                })
+             );
     }
     logout(){
         localStorage.clear();
-        this.router.navigateByUrl('/');
         location.reload();
-        
+        this.router.navigateByUrl('/');
     }
 }

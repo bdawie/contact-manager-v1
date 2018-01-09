@@ -35,7 +35,10 @@ export class SignupComponent implements OnInit {
       Validators.required,
       Validators.email
     ]);
-    this.password = new FormControl('',Validators.required);
+    this.password = new FormControl('',[
+      Validators.required,
+      Validators.minLength(8)
+    ]);
   }
   createFormGroup(){
     this.signupFormGroup = new FormGroup({
@@ -46,6 +49,9 @@ export class SignupComponent implements OnInit {
     });
   }
   onSignup(){
+    this.signupFailed = false;
+    this.userCreated = false;
+
     const user = new User(
      this.signupFormGroup.value.email,
      this.signupFormGroup.value.password,

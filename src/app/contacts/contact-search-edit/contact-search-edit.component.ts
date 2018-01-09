@@ -46,8 +46,10 @@ export class ContactSearchEditComponent implements OnInit,OnChanges {
   pictureUrl : FormControl;
 
   contactImage:string;
+  token:String;
 
   constructor(private contactService:ContactService) { 
+    this.token = localStorage.getItem('token');
     this.createFormControls();
     this.createForm();
   }
@@ -167,9 +169,9 @@ export class ContactSearchEditComponent implements OnInit,OnChanges {
     this.changeThisContact();
     const formData = this.createFormData();
 
-    this.contactService.updateContact(this.contact.contactId,formData)
+    this.contactService.updateContact(this.contact.contactId,formData,this.token)
         .subscribe((data)=>{
-          console.log('Successfuly updated!'); 
+          this.contact.pictureUrl=data.contact.pictureUrl;
         },
       (err:HttpErrorResponse)=>{
         if(err instanceof Error){
@@ -181,6 +183,7 @@ export class ContactSearchEditComponent implements OnInit,OnChanges {
       }
       },()=>{
         this.closeModal();
+        this.ngOnChanges(null);
       });
   }
 

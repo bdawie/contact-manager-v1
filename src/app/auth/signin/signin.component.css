@@ -1,0 +1,40 @@
+ .navbar-default{
+    background-color: rgba(117, 65, 165, 1);
+}
+/* Signin validation CSS*/
+.form-control{
+    width: 200px;
+    border-radius: 0%;
+    box-shadow: none;
+}
+.form-control:focus{
+    border-color: rgba(117, 65, 165, 1);
+    outline: none;    
+}
+.btn-primary{
+    background-color: white;
+    color: blueviolet;
+    border-radius: 2%;
+    box-shadow: none;
+}
+.btn-primary:focus{
+    outline: none;
+    background-color: blueviolet;
+    color: white;
+}
+.btn-primary:active{
+    background-color: white;
+    color: blueviolet;
+}
+
+.btn-primary:hover{
+    background-color: #ddd;
+}
+
+.password-reset{
+    color: white;
+    cursor: pointer;
+}
+.password-reset:hover{
+    color: #ddd;
+}

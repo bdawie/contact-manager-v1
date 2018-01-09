@@ -10,6 +10,7 @@ import {
   SimpleChanges} from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
 
@@ -28,10 +29,7 @@ export class ContactComponent implements OnInit ,OnChanges{
   @Input() contact:Contact;
   @ViewChild('contactPhotoEditInput') contactPhotoEditInput:ElementRef;
   
-  updatedContact : Contact;
-  
   editContactForm : FormGroup;
-
   firstName : FormControl;
   lastName : FormControl;
   phoneNumber : FormControl;
@@ -44,24 +42,29 @@ export class ContactComponent implements OnInit ,OnChanges{
   eventTitle : FormControl;
   eventDate : FormControl;
   notes : FormControl;
+
+  updatedContact : Contact;
+
   pictureUrl : FormControl;
 
   contactImage:string;
 
+  token:String;
+
   constructor(private contactService:ContactService) { 
+    this.token=localStorage.getItem('token');
     this.createFormControls();
     this.createForm();
   }
 
   ngOnChanges(changes:SimpleChanges){
-    console.log(this.contact.pictureUrl);
+
     if (this.contact.pictureUrl === '' || this.contact.pictureUrl === null || this.contact.pictureUrl === undefined){
       this.clearFile();
       this.contactImage ='http://ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png';
     } else{
       this.contactImage = this.contact.pictureUrl
       }
-
     // convert to DOM date format
     const birthdayDate= moment(this.contact.birthday).format('YYYY-MM-DD');
 
@@ -106,6 +109,7 @@ export class ContactComponent implements OnInit ,OnChanges{
     this.notes = new FormControl('');
     this.pictureUrl = new FormControl('');
   }
+
   private createForm(){
     this.editContactForm = new FormGroup({
       firstName : this.firstName,
@@ -144,11 +148,11 @@ export class ContactComponent implements OnInit ,OnChanges{
     if(file){
       formData.append('contactPic',file,file.name);
     }
-
     return formData;
  }  
 
  private changeThisContact(){
+   console.log(this.contact);
   this.contact.firstName = this.editContactForm.value.firstName;
   this.contact.lastName = this.editContactForm.value.lastName;
   this.contact.phoneNumber=  this.editContactForm.value.phoneNumber;
@@ -164,12 +168,14 @@ export class ContactComponent implements OnInit ,OnChanges{
  }
 
   private onEditSubmit(){
-    this.changeThisContact();
+    
     const formData = this.createFormData();
+    this.changeThisContact();
 
-    this.contactService.updateContact(this.contact.contactId,formData)
+    this.contactService.updateContact(this.contact.contactId,formData,this.token)
         .subscribe((data)=>{
-          console.log('Successfuly updated!'); 
+          this.contact.pictureUrl = data.contact.pictureUrl;
+  
         },
       (err:HttpErrorResponse)=>{
         if(err instanceof Error){
@@ -177,10 +183,10 @@ export class ContactComponent implements OnInit ,OnChanges{
         }
         else{
           console.log(`Backend error. Status code ${err.status}. error body ${err.message}`);
-          console.log(err);
-      }
+        }
       },()=>{
         this.closeModal();
+        this.ngOnChanges(null);
       });
   }
 

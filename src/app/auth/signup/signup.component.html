@@ -14,41 +14,40 @@
     </article>
     <form class="singup-form" [formGroup]="signupFormGroup" (ngSubmit)="onSignup()" novalidate >
       <div class="form-group">
-        <label for="firstName">First name</label>
+        <label for="signupFirstName">First name</label>
         <input 
           type="text" 
-          id="firstName" 
+          id="signupFirstName" 
           class="form-control" 
           formControlName="firstName">
       </div>
       <div class="form-group">
-        <label for="lastName">Last name</label>
+        <label for="signupLastName">Last name</label>
         <input 
           type="text" 
-          id="lastName" 
+          id="signupLastName" 
           class="form-control" 
           formControlName="lastName">
       </div>
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="signupEmail">Email</label>
         <input 
           type="email" 
-          id="email" 
+          id="signupEmail" 
           class="form-control" 
           formControlName="email">
       </div>
       <div class="form-group">
-        <label for="password">Password (8 or more characters)</label>
+        <label for="signupPassword">Password (8 or more characters)</label>
         <input 
           type="password" 
-          id="password" 
+          id="signupPassword" 
           class="form-control" 
           formControlName="password">
       </div>
       <div class="signup-btn">
-          <button type="submit" class="btn btn-primary">Done!</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!signupFormGroup.valid">Done!</button>
       </div>
-      
     </form>
   </div>
 </div>
