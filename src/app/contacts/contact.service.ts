@@ -24,7 +24,7 @@ export class ContactService{
             "Authorization":'Bearer '+ token
         });       
         return this.httpClient.post<ContactResponse>(
-            'http://localhost:3000/contact',
+            'https://contacts-pro.herokuapp.com/contact',
             formData,
             {headers})
             .pipe(
@@ -57,14 +57,14 @@ export class ContactService{
             "Authorization":'Bearer '+ token
         });
 
-         return this.httpClient.get<ContactsResponse>('http://localhost:3000/contact',{headers:tokenHeader});
+         return this.httpClient.get<ContactsResponse>('https://contacts-pro.herokuapp.com/contact',{headers:tokenHeader});
     }
     
     updateContact(contactId,formData:FormData,token){
         const tokenHeader = new HttpHeaders({
             "Authorization":'Bearer '+ token
         });
-        return this.httpClient.patch<ContactResponse>(`http://localhost:3000/contact/${contactId}`,formData,{headers:tokenHeader});
+        return this.httpClient.patch<ContactResponse>(`https://contacts-pro.herokuapp.com/contact/${contactId}`,formData,{headers:tokenHeader});
     }
 
     deleteContact(contact:Contact,token){
@@ -72,7 +72,7 @@ export class ContactService{
             "Authorization":'Bearer '+ token
         });
         this.contacts.splice(this.contacts.indexOf(contact),1);
-        return this.httpClient.delete<ContactResponse>(`http://localhost:3000/contact/${contact.contactId}`,{headers:tokenHeader});
+        return this.httpClient.delete<ContactResponse>(`https://contacts-pro.herokuapp.com/contact/${contact.contactId}`,{headers:tokenHeader});
     }
 
     searchContacts(term:string,token):Observable<Contact[]>{
@@ -84,7 +84,7 @@ export class ContactService{
             const contacts:Contact[]=[];
             return of(contacts);
         }
-        return this.httpClient.get<Contact[]>(`http://localhost:3000/contact/search?name=${term}`,{headers:tokenHeader});
+        return this.httpClient.get<Contact[]>(`https://contacts-pro.herokuapp.com/contact/search?name=${term}`,{headers:tokenHeader});
     }
     syncContacts(contacts){
         this.contacts=contacts;

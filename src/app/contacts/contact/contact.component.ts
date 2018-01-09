@@ -167,7 +167,7 @@ export class ContactComponent implements OnInit ,OnChanges{
   this.contact.notes   = this.editContactForm.value.notes;
  }
 
-  private onEditSubmit(){
+   onEditSubmit(){
     
     const formData = this.createFormData();
     this.changeThisContact();
@@ -190,7 +190,7 @@ export class ContactComponent implements OnInit ,OnChanges{
       });
   }
 
-  private onEditModalClose(){
+   onEditModalClose(){
     $("#editFirstNameInput").focus();
     this.ngOnChanges(null);
     // if(this.contactImage === ''){
@@ -198,7 +198,7 @@ export class ContactComponent implements OnInit ,OnChanges{
     // }
   }
 
-  private onPhotoChange(contactPhotoEditInput){
+   onPhotoChange(contactPhotoEditInput){
     if(contactPhotoEditInput.files && contactPhotoEditInput.files[0]){
       const reader = new FileReader();
       reader.onload = function(e:any){

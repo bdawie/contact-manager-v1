@@ -18,7 +18,7 @@ export class AuthService{
     signup(user:User){
         const body = JSON.stringify(user);
         return this.httpClient.post<UserResponse>(
-            'http://localhost:3000/user/signup',
+            'https://contacts-pro.herokuapp.com/user/signup',
             body,
             {headers:this.headers});
     }
@@ -26,7 +26,7 @@ export class AuthService{
     signin(user:User){
         const body= JSON.stringify(user);
         return this.httpClient.post<UserResponse>(
-            'http://localhost:3000/user/signin',
+            'https://contacts-pro.herokuapp.com/user/signin',
              body,
              {headers:this.headers}).pipe(
                 tap(data=>{

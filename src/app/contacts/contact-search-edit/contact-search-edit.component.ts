@@ -165,7 +165,7 @@ export class ContactSearchEditComponent implements OnInit,OnChanges {
   this.contact.notes   = this.editContactForm.value.notes;
  }
 
-  private onEditSubmit(){
+   onEditSubmit(){
     this.changeThisContact();
     const formData = this.createFormData();
 
@@ -187,7 +187,7 @@ export class ContactSearchEditComponent implements OnInit,OnChanges {
       });
   }
 
-  private onEditModalClose(){
+   onEditModalClose(){
     $("#editFirstNameSearchInput").focus();
     this.ngOnChanges(null);
     // if(this.contactImage === ''){
@@ -195,7 +195,7 @@ export class ContactSearchEditComponent implements OnInit,OnChanges {
     // }
   }
 
-  private onPhotoChange(searchedContactPhotoEditInput){
+   onPhotoChange(searchedContactPhotoEditInput){
     if(searchedContactPhotoEditInput.files && searchedContactPhotoEditInput.files[0]){
       const reader = new FileReader();
       reader.onload = function(e:any){
@@ -204,7 +204,7 @@ export class ContactSearchEditComponent implements OnInit,OnChanges {
       reader.readAsDataURL(searchedContactPhotoEditInput.files[0]);
     }
   }
-  private clearFile() {
+   clearFile() {
     this.searchedContactPhotoEditInput.nativeElement.value = '';
     $("#contactPhotoSearchEditImg").attr('src','http://ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png');
 

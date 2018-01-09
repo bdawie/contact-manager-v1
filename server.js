@@ -9,7 +9,7 @@ const userRouter = require('./server/routes/user');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/contacts-manager',{useMongoClient:true});
+mongoose.connect('mongodb://bdawie:ilovevolk*@mongodb-atlas-shard-00-00-azmum.mongodb.net:27017,mongodb-atlas-shard-00-01-azmum.mongodb.net:27017,mongodb-atlas-shard-00-02-azmum.mongodb.net:27017/contacts-manager?ssl=true&replicaSet=mongodb-atlas-shard-0&authSource=admin',{useMongoClient:true});
 mongoose.Promise = global.Promise;
 
 const port = process.env.PORT || 3000;

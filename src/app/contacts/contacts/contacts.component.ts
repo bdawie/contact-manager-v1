@@ -104,7 +104,7 @@ export class ContactsComponent implements OnInit, OnChanges,DoCheck {
   ngOnChanges(){
   }
 
-  private search(term:string):void{
+   search(term:string):void{
     this.searchTerms.next(term);
   }
 
@@ -138,15 +138,15 @@ export class ContactsComponent implements OnInit, OnChanges,DoCheck {
     this.selectedSearchContact = contact;
   }
 
-  private onCreateClick(){
+   onCreateClick(){
     this.contactCreate.openModal();
   }
 
- private onLogout(){
+  onLogout(){
     this.authService.logout();
   }
 
-  private onAllContactsClick(){
+   onAllContactsClick(){
     this.ngOnInit();
   }
 
@@ -187,7 +187,7 @@ export class ContactsComponent implements OnInit, OnChanges,DoCheck {
     });
   }
 
-  private onMenubarClick(){
+   onMenubarClick(){
     if(this.sidebarMenu.nativeElement.style.width === '0px'){
 
       this.sidebarMenu.nativeElement.style.width='250px';

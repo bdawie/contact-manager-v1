@@ -7,7 +7,7 @@ const fs = require('fs');
 const storage = multer.diskStorage({
     destination:'./images-uploads',
     filename: function (req, file, cb) {
-        cb(null, file.originalname);
+        cb(null, new Date().getTime() + 'created' + file.originalname);
       }
 });
 const fileFilter = (req,file,cb)=>{
