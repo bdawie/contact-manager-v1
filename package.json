@@ -9,8 +9,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build --aot -prod"
+    "e2e": "ng e2e"
   },
   "engines": {
     "node":"~8.9.0",
@@ -45,8 +44,6 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.5.5",
-    "@angular/compiler-cli": "^5.0.0",
     "@angular/language-service": "^5.0.0",
     "@types/bootstrap": "^3.3.36",
     "@types/jasmine": "~2.5.53",
