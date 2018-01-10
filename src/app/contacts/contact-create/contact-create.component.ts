@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {HttpErrorResponse} from '@angular/common/http';
 
@@ -24,7 +25,7 @@ export class ContactCreateComponent implements OnInit {
   createdContact:Boolean;
   token:String;
 
-  constructor(private contactService : ContactService) { 
+  constructor(private contactService : ContactService, private router:Router) { 
     this.token=localStorage.getItem('token');
   }
   
@@ -92,6 +93,11 @@ export class ContactCreateComponent implements OnInit {
           this.createdContact = true;
         },
         (err:HttpErrorResponse)=>{
+          if(err.status === 401){
+            localStorage.clear();
+            this.router.navigateByUrl('/');
+          }
+          
           if(err instanceof Error){
             console.log('An error occured',err.error.message);
           }

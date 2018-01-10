@@ -111,6 +111,18 @@
     
 }
 /* Form CSS*/
+
+.contact-edit{
+    z-index: 10;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    background-color: rgba(117, 65, 165, 1);
+    color: #FFF;
+    width: 300px;
+    transform: translate(10%,0);
+    border-color: transparent;
+}
 /* Contact photo input CSS */
 .contact-photo-edit-input >label{
     cursor: pointer

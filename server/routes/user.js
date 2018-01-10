@@ -58,7 +58,7 @@ router.post('/signin',(req,res)=>{
                 firstName:user.firstName,
                 lastName:user.lastName,
                 userId:user._id
-            },'secretkeymanager',{expiresIn:'2h'});
+            },'secretkeymanager',{expiresIn:'3h'});
             res.status(200).json({
                 message:'Successfuly signed in!',
                 token,

@@ -76,8 +76,8 @@ export class ContactsComponent implements OnInit, OnChanges,DoCheck {
 
   ngOnInit() 
   {
-    this.sidebarMenu.nativeElement.style.width='250px';
-    this.contactsList.nativeElement.style.marginLeft='300px';
+    this.sidebarMenu.nativeElement.style.width='300px';
+    this.contactsList.nativeElement.style.marginLeft='310px';
 
     this.getAllContacts();
 
@@ -190,8 +190,8 @@ export class ContactsComponent implements OnInit, OnChanges,DoCheck {
    onMenubarClick(){
     if(this.sidebarMenu.nativeElement.style.width === '0px'){
 
-      this.sidebarMenu.nativeElement.style.width='250px';
-      this.contactsList.nativeElement.style.marginLeft="300px";
+      this.sidebarMenu.nativeElement.style.width='300px';
+      this.contactsList.nativeElement.style.marginLeft="310px";
     }
     else{
       this.sidebarMenu.nativeElement.style.width='0px';

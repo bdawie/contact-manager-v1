@@ -8,6 +8,7 @@ import {
   ElementRef,
   AfterViewChecked,
   SimpleChanges} from '@angular/core';
+  import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -49,9 +50,12 @@ export class ContactComponent implements OnInit ,OnChanges{
 
   contactImage:string;
 
+  contactEdited:Boolean;
+  isUpdating:Boolean;
+
   token:String;
 
-  constructor(private contactService:ContactService) { 
+  constructor(private contactService:ContactService,private router:Router) { 
     this.token=localStorage.getItem('token');
     this.createFormControls();
     this.createForm();
@@ -168,16 +172,23 @@ export class ContactComponent implements OnInit ,OnChanges{
  }
 
    onEditSubmit(){
-    
+    this.contactEdited =false;
+    this.isUpdating = true;
     const formData = this.createFormData();
     this.changeThisContact();
 
     this.contactService.updateContact(this.contact.contactId,formData,this.token)
         .subscribe((data)=>{
           this.contact.pictureUrl = data.contact.pictureUrl;
+          this.contactEdited=true;
+          this.isUpdating=false;
   
         },
       (err:HttpErrorResponse)=>{
+        if(err.status === 401){
+          localStorage.clear();
+          this.router.navigateByUrl('/');
+        }
         if(err instanceof Error){
           console.log('An error occured',err.error.message);
         }
@@ -185,8 +196,11 @@ export class ContactComponent implements OnInit ,OnChanges{
           console.log(`Backend error. Status code ${err.status}. error body ${err.message}`);
         }
       },()=>{
-        this.closeModal();
+        setTimeout(()=>{
+          this.contactEdited=false;
+        },2500);
         this.ngOnChanges(null);
+        
       });
   }
 

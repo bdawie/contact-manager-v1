@@ -130,8 +130,8 @@
     background-color: rgba(117, 65, 165, 1);
     color: #FFF;
     width: 300px;
-    left: 50%;
-    transform: translate(-50%,0);
+    
+    transform: translate(10%,0);
     border-color: transparent;
 }
 
