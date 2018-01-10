@@ -43,8 +43,8 @@ export class ContactsComponent implements OnInit, OnChanges,DoCheck {
   contacts$:Observable<Contact[]>;
   private searchTerms = new Subject<string>();
 
-  contactCreate = new ContactCreateComponent(null);
-  contactSearchEditComponent = new ContactSearchEditComponent(null);
+  contactCreate = new ContactCreateComponent(null,null);
+  contactSearchEditComponent = new ContactSearchEditComponent(null,null);
   contactList = new ContactListComponent(null);
 
   contacts:Contact[];
