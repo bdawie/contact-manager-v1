@@ -28,7 +28,7 @@ export class ContactListComponent implements OnInit {
     this.token = localStorage.getItem('token');
    }
 
-  contactComponent = new ContactComponent(null);
+  contactComponent = new ContactComponent(null,null);
 
   onContactEdit(contact){
      if(this.selectedContact===contact){
