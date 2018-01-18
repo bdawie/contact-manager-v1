@@ -5,7 +5,7 @@ const multer = require('multer');
 const fs = require('fs');
 
 const storage = multer.diskStorage({
-    destination:'./images-uploads',
+    destination:'./static/contacts-images',
     filename: function (req, file, cb) {
         cb(null, new Date().getTime() + 'created' + file.originalname);
       }
@@ -90,7 +90,6 @@ router.post('/',getToken,upload.single('contactPic'),(req,res)=>{
                 error:err
             });
         }
-        console.log(req.file);
         let imageUrl;
         if(req.file){
             imageUrl = req.file.path;

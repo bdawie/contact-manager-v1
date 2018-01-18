@@ -19,7 +19,6 @@ app.use(morgan('dev'));
 // Send static files
 app.use(express.static(path.join(__dirname,'dist')));
 app.use(express.static(path.join(__dirname,'static')));
-app.use('/images-uploads',express.static(path.join(__dirname,'images-uploads')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
