@@ -1,31 +1,54 @@
-.panel{
+
+.contact-info-wrapper{
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto;
     grid-gap: 10px;
     cursor: pointer;
+    margin: 20px;
+    justify-items: stretch;
 }
-.wrapper-panel-body {
+
+.wrapper-info-body {
     display: grid;
-    grid-template-columns: 200px  100px 100px;
+    grid-template-columns: 250px  100px 100px 50px;
     grid-gap: 10em;
-    align-items: center;
+    padding: 20px;
+    justify-items: stretch;
+}
 
+.wrapper-info-body:hover{
+    background-color: rgb(241, 241, 241);
 }
-.email-info{
-    align-self: center;
-    justify-self: center;
-}
-.panel-footer{
+
+
+/* .panel-footer{
     grid-column-start: 3;
+} */
+
+.contact-name-image-wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    justify-items: center;
 }
 
-.contact-options ul{
-    list-style: none;
+.email-info{
+    /* align-self: center;
+    justify-self: center; */
 }
-.options{
-    display: inline;
+
+
+.contact-options-list{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    justify-items: center;
+}
+
+/* .options{
+    display: inline-block;
     margin: 10px;
-}
+} */
 
 .glyphicon{
     color:rgba(43, 42, 44, 0.7);
@@ -37,6 +60,15 @@
 .contact-deleted-alert{
     position: fixed;
     bottom: 0;
-    z-index: 2;
-    width: 800px;
+    z-index: 10;
+
+    transform: translate(-95%,0);
+    width: 300px;
+    background-color: rgba(117, 65, 165, 1);
+    color: #FFF;
+    border-color: transparent;
+    text-align: center;
+}
+* {
+    box-sizing: border-box;
 }

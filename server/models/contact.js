@@ -1,5 +1,5 @@
-
 const mongoose = require('mongoose');
+const User = require('./user');
 
 const Schema = mongoose.Schema;
 
@@ -18,6 +18,14 @@ const contactSchema = new Schema({
     notes:{type:String},
     pictureUrl:{type:String},
     user:{type:Schema.Types.ObjectId,ref:'User',required:true}
+});
+contactSchema.post('remove',(contact)=>{
+   
+    User.findById(contact.user,(err,user)=>{
+        console.log('removed Succesfuly!');
+        user.contacts.pull(contact);
+        user.save();
+    })
 });
 
 module.exports = mongoose.model('Contact',contactSchema);

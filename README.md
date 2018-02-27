@@ -1,6 +1,6 @@
 # ContactsManager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.5.
+Check out this project by visiting [ContactsPro](https://contacts-pro.herokuapp.com/)
 
 ## Development server
 

@@ -1,13 +1,45 @@
-
-#email.ng-dirty.ng-invalid{
+/* Name Validation CSS*/
+#editFirstNameInput.ng-touched.ng-invalid{
     border-left: solid 5px red;
 }
-#email.ng-dirty.ng-valid{
+#editLastNameInput.ng-touched.ng-invalid{
+    border-left: solid 5px red;
+}
+
+#editFirstNameInput.ng-dirty.ng-valid{
     border-left: solid 5px green;
 }
+#editLastNameInput.ng-dirty.ng-valid{
+    border-left: solid 5px green;
+}
+/* Name Validation CSS*/
+
+/* Phone Number Validation CSS*/
+
+#editPhoneNumberInput.ng-touched.ng-invalid{
+    border-left: solid 5px red;
+}
+#editPhoneNumberInput.ng-dirty.ng-valid{
+    border-left: solid 5px green;
+}
+/* Phone Number Validation CSS*/
+
+/* Email Validation CSS*/
+
+#editEmailInput.ng-dirty.ng-invalid{
+    border-left: solid 5px red;
+}
+#editEmailInput.ng-dirty.ng-valid{
+    border-left: solid 5px green;
+}
+/* Email Validation CSS*/
+
+
+/* Modal CSS */
 .modal{
     background-color: rgba(163, 158, 158, 0.6);
 }
+
 .modal-content{
     position: relative;
     top: 70px;
@@ -15,19 +47,92 @@
     margin: auto;
     max-width: 700px;
     overflow-x: auto;
-    
 }
+
 .modal-header{
     position: sticky;
     top: 0;
 }
+
 .modal-body{
+    position: relative;
     max-height: 400px;
     overflow-y: scroll; 
 }
+
+.footer-section{
+    position: sticky;
+    bottom: 0;
+    right: 0;
+    height: 22px;   
+    text-align: right; 
+    border: transparent;
+    padding: 0;
+    margin-bottom: 1px;
+}
+
+.modal-footer-options{
+    background-color: rgb(255, 255, 255);
+    height: 80px;  
+}
+
+.modal-footer-options .btn-primary{
+    background-color: rgba(117, 65, 165, 1);
+    border-color: transparent;
+    color: white;
+    width: 150px;
+}
+
+.modal-footer-options .btn-primary:focus{
+    outline: none;
+}
+
+.modal-footer-options .btn-default{
+    background-color: rgb(236, 233, 233);
+    border-color: transparent;
+    color: rgb(37, 31, 31);
+    width: 70px;
+}
+.modal-footer-options .btn-default:focus{
+    outline: none;
+}
+/* Modal CSS */
+
+
+
+/* Form CSS */
+.form-control{
+    border-radius: 0%;
+    box-shadow: none;
+}
+.form-control:focus{
+    border-color: rgba(117, 65, 165, 1);
+    outline: none;
+    
+}
+/* Form CSS*/
+
+/* Contact photo input CSS */
 .contact-photo-edit-input >label{
     cursor: pointer
 }
 .contact-photo-edit-input > input{
     display: none;
+}
+
+.contact-edit{
+    z-index: 10;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    background-color: rgba(117, 65, 165, 1);
+    color: #FFF;
+    width: 300px;
+    transform: translate(10%,0);
+    border-color: transparent;
+}
+/* Contact photo input CSS */
+
+*{
+    box-sizing: border-box;
 }

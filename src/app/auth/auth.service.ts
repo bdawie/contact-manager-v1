@@ -1,3 +1,4 @@
+import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Injectable } from "@angular/core";
 import {HttpClient,HttpHeaders} from "@angular/common/http";
@@ -17,7 +18,7 @@ export class AuthService{
     signup(user:User){
         const body = JSON.stringify(user);
         return this.httpClient.post<UserResponse>(
-            'http://localhost:3000/user/signup',
+            'https://contacts-pro.herokuapp.com/user/signup',
             body,
             {headers:this.headers});
     }
@@ -25,14 +26,17 @@ export class AuthService{
     signin(user:User){
         const body= JSON.stringify(user);
         return this.httpClient.post<UserResponse>(
-            'http://localhost:3000/user/signin',
+            'https://contacts-pro.herokuapp.com/user/signin',
              body,
-             {headers:this.headers});
+             {headers:this.headers}).pipe(
+                tap(data=>{
+                     location.reload();
+                })
+             );
     }
     logout(){
         localStorage.clear();
-        this.router.navigateByUrl('/');
         location.reload();
-        
+        this.router.navigateByUrl('/');
     }
 }

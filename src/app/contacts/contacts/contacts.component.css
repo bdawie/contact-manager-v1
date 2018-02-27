@@ -1,22 +1,35 @@
+.all-parts-wrapper{
+    height: 100vh;
+}
+
+.fa-bars{
+    color: rgb(255, 255, 255);
+    font-size: 28px;
+    cursor: pointer;
+}
+.fa-bars:hover{
+  color: #ddd;
+}
+
 /* General Header CSS*/
 .main-header{
-    height: 80px;
+    height: 70px;
 }
 .main-header-navigation{
     position: fixed;
     top: 0;
     width: 100%;
     height: 70px;
-    background-color: rgba(117, 65, 165, 0.938);
+    background-color: rgba(117, 65, 165, 1);
     color: white;
     padding: 10px;
     margin: 0;
-    z-index: 1;
+    z-index: 10;
     
 } 
 .main-header-wrapper{
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 36px 1fr 2fr 1fr;
     grid-gap: 1em;
 }
 
@@ -120,7 +133,7 @@ padding: 5px;
 /* User-Options-Header CSS*/
 .current-user-info{
     justify-self: right;
-    align-self: center;
+    /* align-self: center; */
     height: 30px;  
     position: relative;
 }
@@ -148,17 +161,44 @@ padding: 5px;
 .current-user-options-dropdown{
     border-top-color: transparent;
 }
-/* Contacts-List CSS*/
- .contacts{
-     display: grid;
-     grid-template-columns: auto;
-     justify-content: center;
-     
-    /* max-width: 800px;
-    margin: auto; */
-}
-/* Create-Contact CSS*/
+.current-user-options-dropdown li a:hover{
+    background-color: rgba(131, 18, 236, 0.8);
+    color: #fff;
 
+}
+
+/* Contacts-Menu- CSS*/
+.contacts-menu-wrapper{
+    display: grid;
+    grid-template-columns: 300px 2fr;
+    grid-auto-rows: minmax(100px, auto);
+    grid-gap: 1em;
+}
+.sidebar-menu{
+    border-right: solid 1px rgba(205, 200, 209, 0.8);
+    height: 100vh;
+    position: fixed; 
+    z-index: 3;
+    overflow-x: hidden;
+    transition:0.4s;
+
+}
+
+.sidebar-menu li {
+    cursor: pointer;
+}
+
+.menu-list a{
+    color: rgb(105, 101, 101);
+}
+ .contacts-list{
+    transition:0.4s;
+    margin-left: 0px;
+    margin-top: 20px;
+    
+}
+
+/* Create-Contact CSS*/
 .create-contact-btn{
     position: fixed;
     bottom: 0;
@@ -180,6 +220,14 @@ padding: 5px;
 .loading-spinner{
     text-align: center;
 }
+.emptyContactsList {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%,0);
+    font-size: 1.5em;
+    text-align: justify;
+}
+
 *{
     box-sizing: border-box;
 }

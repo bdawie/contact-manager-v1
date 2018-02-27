@@ -8,8 +8,10 @@ import {
   ElementRef,
   AfterViewChecked,
   SimpleChanges} from '@angular/core';
+  import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
 
@@ -28,10 +30,7 @@ export class ContactComponent implements OnInit ,OnChanges{
   @Input() contact:Contact;
   @ViewChild('contactPhotoEditInput') contactPhotoEditInput:ElementRef;
   
-  updatedContact : Contact;
-  
   editContactForm : FormGroup;
-
   firstName : FormControl;
   lastName : FormControl;
   phoneNumber : FormControl;
@@ -44,24 +43,32 @@ export class ContactComponent implements OnInit ,OnChanges{
   eventTitle : FormControl;
   eventDate : FormControl;
   notes : FormControl;
+
+  updatedContact : Contact;
+
   pictureUrl : FormControl;
 
   contactImage:string;
 
-  constructor(private contactService:ContactService) { 
+  contactEdited:Boolean;
+  isUpdating:Boolean;
+
+  token:String;
+
+  constructor(private contactService:ContactService,private router:Router) { 
+    this.token=localStorage.getItem('token');
     this.createFormControls();
     this.createForm();
   }
 
   ngOnChanges(changes:SimpleChanges){
-    console.log(this.contact.pictureUrl);
+
     if (this.contact.pictureUrl === '' || this.contact.pictureUrl === null || this.contact.pictureUrl === undefined){
       this.clearFile();
       this.contactImage ='http://ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png';
     } else{
       this.contactImage = this.contact.pictureUrl
       }
-
     // convert to DOM date format
     const birthdayDate= moment(this.contact.birthday).format('YYYY-MM-DD');
 
@@ -106,6 +113,7 @@ export class ContactComponent implements OnInit ,OnChanges{
     this.notes = new FormControl('');
     this.pictureUrl = new FormControl('');
   }
+
   private createForm(){
     this.editContactForm = new FormGroup({
       firstName : this.firstName,
@@ -144,11 +152,11 @@ export class ContactComponent implements OnInit ,OnChanges{
     if(file){
       formData.append('contactPic',file,file.name);
     }
-
     return formData;
  }  
 
  private changeThisContact(){
+   console.log(this.contact);
   this.contact.firstName = this.editContactForm.value.firstName;
   this.contact.lastName = this.editContactForm.value.lastName;
   this.contact.phoneNumber=  this.editContactForm.value.phoneNumber;
@@ -163,28 +171,40 @@ export class ContactComponent implements OnInit ,OnChanges{
   this.contact.notes   = this.editContactForm.value.notes;
  }
 
-  private onEditSubmit(){
-    this.changeThisContact();
+   onEditSubmit(){
+    this.contactEdited =false;
+    this.isUpdating = true;
     const formData = this.createFormData();
+    this.changeThisContact();
 
-    this.contactService.updateContact(this.contact.contactId,formData)
+    this.contactService.updateContact(this.contact.contactId,formData,this.token)
         .subscribe((data)=>{
-          console.log('Successfuly updated!'); 
+          this.contact.pictureUrl = data.contact.pictureUrl;
+          this.contactEdited=true;
+          this.isUpdating=false;
+  
         },
       (err:HttpErrorResponse)=>{
+        if(err.status === 401){
+          localStorage.clear();
+          this.router.navigateByUrl('/');
+        }
         if(err instanceof Error){
           console.log('An error occured',err.error.message);
         }
         else{
           console.log(`Backend error. Status code ${err.status}. error body ${err.message}`);
-          console.log(err);
-      }
+        }
       },()=>{
-        this.closeModal();
+        setTimeout(()=>{
+          this.contactEdited=false;
+        },2500);
+        this.ngOnChanges(null);
+        
       });
   }
 
-  private onEditModalClose(){
+   onEditModalClose(){
     $("#editFirstNameInput").focus();
     this.ngOnChanges(null);
     // if(this.contactImage === ''){
@@ -192,7 +212,7 @@ export class ContactComponent implements OnInit ,OnChanges{
     // }
   }
 
-  private onPhotoChange(contactPhotoEditInput){
+   onPhotoChange(contactPhotoEditInput){
     if(contactPhotoEditInput.files && contactPhotoEditInput.files[0]){
       const reader = new FileReader();
       reader.onload = function(e:any){

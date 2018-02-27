@@ -1,32 +1,97 @@
-
-.wrapper{
-    height: 100vh;
-    background-image: url("https://expertbeacon.com/sites/default/files/managers_who_practice_self_awareness_make_excellent_leaders.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-}
 article{
     text-align: center;
     margin: 10px;
 }
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr;
+    /* grid-auto-rows: minmax(100px,auto); */
+    height: 100vh;
+    
+    background-image: url("/images/signup-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.signup-success{
+    width: 420px;
+    justify-self: center;
+    align-self: center;
+}
+.signup-failed{
+    width: 420px;
+    justify-self: center;
+    align-self: center;
+}
 .sign-up-container{
-    position: relative;
-    top:50px;
-    left: -30px;
-    max-width: 500px;
-    margin: 0px auto;
+    justify-self: center;
+    align-self: center;
+    height: 470px; 
+    width: 420px;
     padding: 20px;
     background-color: rgb(233, 225, 225);
-    border-radius: 15px;
-    
+    border-radius: 5px;   
+}
+/* Signup validation CSS*/
+#signupFirstName.ng-touched.ng-invalid{
+    border-left: solid 5px red;
+}
+#signupLastName.ng-touched.ng-invalid{
+    border-left: solid 5px red;
+}
+#signupEmail.ng-touched.ng-invalid{
+    border-left: solid 5px red;
+}
+#signupPassword.ng-touched.ng-invalid{
+    border-left: solid 5px red;
+}
+/* Signup validation CSS*/
+#signupFirstName.ng-dirty.ng-valid{
+    border-left: solid 5px green;
+}
+#signupLastName.ng-dirty.ng-valid{
+    border-left: solid 5px green;
+}
+#signupEmail.ng-dirty.ng-valid{
+    border-left: solid 5px green;
+}
+#signupPassword.ng-dirty.ng-valid{
+    border-left: solid 5px green;
 }
 
+.form-control{
+    border-radius: 0%;
+    box-shadow: none;
+}
+.form-control:focus{
+    border-color: rgba(117, 65, 165, 1);
+    outline: none;    
+}
 .signup-btn{
     text-align: center;
 }
-.btn{
- width: 300px;
- margin: auto;  
- color: white;
- background-color: rgb(116, 116, 209);
+.btn-primary{
+    width: 300px;
+    margin: auto;  
+    background-color: rgba(117, 65, 165, 1);
+    border-color: transparent;
+    color: white;
+    border-radius: 2%;
+    box-shadow: none;
+}
+.btn-primary:focus{
+    outline: none;
+}
+.btn-primary:active{
+    background-color: rgba(117, 65, 165, 1);
+    border-color: transparent;
+    color: white;
+}
+.btn-primary:hover{
+    background-color: rgb(136, 113, 156);
+    border-color: transparent;
+    color: white;
+}
+
+*{
+    box-sizing: border-box;
 }

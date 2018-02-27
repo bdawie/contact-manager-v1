@@ -13,37 +13,20 @@ interface ContactsResponse{
     contacts:Contact[];
 }
 
-const token = localStorage.getItem('token');
-const headers = new HttpHeaders({
-    'Content-Type':'application/json',
-    "Authorization":'Bearer '+ token
-});
-const headerss = new HttpHeaders({
-    // 'Content-Type': 'multipart/form-data; boundary=aBoundaryString',
-    "Authorization":'Bearer '+ token
-});
-
-
 @Injectable()
 export class ContactService{
     contacts:Contact[]=[];
 
     constructor(private httpClient:HttpClient){}
 
-    createImage(formData:any){
-        console.log(formData);
-        this.httpClient.post('http://localhost:3000/contact/uploads',formData)
-        .subscribe(data=>{
-            console.log(data);
-        });
-    }  
-    createContact(formData:any){
-        // const body = JSON.stringify(contact);
-        const token = localStorage.getItem('token');
-       return this.httpClient.post<ContactResponse>(
-            'http://localhost:3000/contact',
+    createContact(formData:any,token){
+        const headers = new HttpHeaders({
+            "Authorization":'Bearer '+ token
+        });       
+        return this.httpClient.post<ContactResponse>(
+            'https://contacts-pro.herokuapp.com/contact',
             formData,
-            {headers:headerss})
+            {headers})
             .pipe(
                 tap(contactData=>{
                     const contact = new Contact(
@@ -69,29 +52,39 @@ export class ContactService{
         );
     }
 
-    getContacts():Observable<ContactsResponse>{
-         let transformedContacts:Contact[]=[];
-         const token = localStorage.getItem('token');
-         
-         return this.httpClient.get<ContactsResponse>('http://localhost:3000/contact',{headers});
+    getContacts(token):Observable<ContactsResponse>{
+        const tokenHeader = new HttpHeaders({
+            "Authorization":'Bearer '+ token
+        });
+
+         return this.httpClient.get<ContactsResponse>('https://contacts-pro.herokuapp.com/contact',{headers:tokenHeader});
     }
     
-    updateContact(contactId,formData:FormData){
-        // const body = JSON.stringify(contact);
-        return this.httpClient.patch<ContactResponse>(`http://localhost:3000/contact/${contactId}`,formData,{headers:headerss});
+    updateContact(contactId,formData:FormData,token){
+        const tokenHeader = new HttpHeaders({
+            "Authorization":'Bearer '+ token
+        });
+        return this.httpClient.patch<ContactResponse>(`https://contacts-pro.herokuapp.com/contact/${contactId}`,formData,{headers:tokenHeader});
     }
 
-    deleteContact(contact:Contact){
+    deleteContact(contact:Contact,token){
+        const tokenHeader = new HttpHeaders({
+            "Authorization":'Bearer '+ token
+        });
         this.contacts.splice(this.contacts.indexOf(contact),1);
-        return this.httpClient.delete<ContactResponse>(`http://localhost:3000/contact/${contact.contactId}`,{headers});
+        return this.httpClient.delete<ContactResponse>(`https://contacts-pro.herokuapp.com/contact/${contact.contactId}`,{headers:tokenHeader});
     }
 
-    searchContacts(term:string):Observable<Contact[]>{
+    searchContacts(term:string,token):Observable<Contact[]>{
+        const tokenHeader = new HttpHeaders({
+            "Authorization":'Bearer '+ token
+        });
+
         if(!term.trim()){
             const contacts:Contact[]=[];
             return of(contacts);
         }
-        return this.httpClient.get<Contact[]>(`http://localhost:3000/contact/search?name=${term}`,{headers});
+        return this.httpClient.get<Contact[]>(`https://contacts-pro.herokuapp.com/contact/search?name=${term}`,{headers:tokenHeader});
     }
     syncContacts(contacts){
         this.contacts=contacts;

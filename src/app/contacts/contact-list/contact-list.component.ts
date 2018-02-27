@@ -1,3 +1,4 @@
+import {HttpErrorResponse} from '@angular/common/http';
 import { ContactService } from './../contact.service';
 import { ContactComponent } from './../contact/contact.component';
 import { Contact } from './../contact.model';
@@ -17,11 +18,17 @@ export class ContactListComponent implements OnInit {
   selectedContact:Contact;
   deletedContact:Contact;
   isContactDeleted:Boolean;
+  emptyContactsList:Boolean;
+  contactImage:String;
+  token:String;
+
 
   
-  constructor(private contactService:ContactService) { }
+  constructor(private contactService:ContactService) {
+    this.token = localStorage.getItem('token');
+   }
 
-  contactComponent = new ContactComponent(null);
+  contactComponent = new ContactComponent(null,null);
 
   onContactEdit(contact){
      if(this.selectedContact===contact){
@@ -30,13 +37,22 @@ export class ContactListComponent implements OnInit {
     this.selectedContact=contact;
   }
   onContactDelete(contact){
-    this.contactService.deleteContact(contact)
+    this.isContactDeleted=false;
+    this.contactService.deleteContact(contact,this.token)
     .subscribe((data)=>{
       this.isContactDeleted=true;
+    },(err:HttpErrorResponse)=>{
+      console.log(err.message);
+    },()=>{
+      setTimeout(()=>{
+        this.isContactDeleted=false;
+      },2500);
     });
-    this.isContactDeleted=false;
+    
   }
   ngOnInit() {
+    
+   
   }
 
 }

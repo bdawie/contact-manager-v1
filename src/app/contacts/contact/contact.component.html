@@ -158,14 +158,24 @@
                   </div>
                 </div>
               </div>
-              <div class="modal-footer">
+              <div class="footer-section">
+                <div class="modal-footer-options">
                   <button type="button" class="btn btn-default" (click)="onEditModalClose()" data-dismiss="modal" >Cancel</button>
-                  <button type="button" class="btn btn-primary" type="submit" [disabled]="editContactForm.pristine && !editContactForm.valid">Save changes</button>
-              </div>  
+                  <button  class="btn btn-primary" type="submit" [disabled]="!editContactForm.valid"><span *ngIf="!isUpdating">Save changes</span> <span *ngIf="isUpdating"><i class="fa fa-spinner fa-spin"></i></span></button>
+                </div> 
+              </div>
           </form>
         </div>
       </div>      
     </div>
+  </div>
+  <div 
+    *ngIf="contactEdited" 
+    class="contact-edit 
+      alert 
+      alert-success 
+      fade in">
+    <p><em>Saved successfully!</em></p>
   </div>
   </div>
 </div>

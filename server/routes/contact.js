@@ -5,9 +5,9 @@ const multer = require('multer');
 const fs = require('fs');
 
 const storage = multer.diskStorage({
-    destination:'./images-uploads',
+    destination:'./static/contacts-images',
     filename: function (req, file, cb) {
-        cb(null, new Date().getTime() + 'created'+ file.originalname);
+        cb(null, new Date().getTime() + 'created' + file.originalname);
       }
 });
 const fileFilter = (req,file,cb)=>{
@@ -90,7 +90,6 @@ router.post('/',getToken,upload.single('contactPic'),(req,res)=>{
                 error:err
             });
         }
-        console.log(req.file);
         let imageUrl;
         if(req.file){
             imageUrl = req.file.path;
@@ -142,10 +141,10 @@ router.post('/',getToken,upload.single('contactPic'),(req,res)=>{
     });
 });
 
-router.post('/uploads',upload.single('contactPic'),(req,res)=>{
-    console.log('image',req.file);
-    res.status(201);
-});
+// router.post('/uploads',upload.single('contactPic'),(req,res)=>{
+//     console.log('image',req.file);
+//     res.status(201);
+// });
 
 router.patch('/:id',getToken,upload.single('contactPic'),(req,res)=>{
     jwt.verify(req.token,secretKey,(err,decoded)=>{
@@ -252,6 +251,7 @@ function getToken(req,res,next){
         const bearer = bearerHeader.split(' ');
         const bearerToken = bearer[1];
         req.token = bearerToken;
+        console.log(bearerToken);
         next();
     }
     else{

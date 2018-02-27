@@ -1,9 +1,13 @@
+<div class="all-parts-wrapper">
 <header class="main-header">
   <div class="main-header-navigation">
     <app-shared>
       <div class="main-header-wrapper">
+        <div class="menu-icon-bar">
+          <i (click)="onMenubarClick()" class="fa fa-bars" aria-hidden="true"></i>
+        </div>
         <div class="navbar-header contacts-brand">
-          <a ><img class="navbar-brand" src="assets/images/ContactsPro.png"></a>
+          <a ><img  src="/images/ContactsPro.png"></a>
         </div>
         <div class="contacts-search-input">
             <div class="input-group">
@@ -22,7 +26,7 @@
               <a (click)="onSearchedContactClick(contact)" >{{contact.firstName}} {{contact.lastName}}</a>
             </li>
           </ul>
-          </div>  
+        </div>  
         <div class="current-user-info">
           <div class="current-user-options dropdown">
             <a 
@@ -43,12 +47,64 @@
   </div>
 </header>
 
-<div class="contacts">
-  <div>
-    <p class="loading-spinner"*ngIf="isLoading"><i class="fa fa-spinner fa-spin"></i></p>
-    <app-contact-list [contacts]="contacts"></app-contact-list>
+<div class="contacts-menu-wrapper">
+  <div #sidebarMenu class="sidebar-menu">
+    <app-sidebar-menu>
+      
+      <div class="menu-navigation">
+          <ul class="nav menu-list">
+            <li>
+              <a (click)="onAllContactsClick()"> <i class="fa fa-address-book fa-fw" aria-hidden="true"></i>
+                All Contacts
+              </a> 
+            </li>
+            <hr>
+            <li class="dropdown">
+              <a  class="dropdown-toggle" data-toggle="dropdown"> 
+                <i class="fa fa-users fa-fw" aria-hidden="true"></i>
+                Relationships <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li *ngIf="relationPropertyNames.length === 0">No relationships found. Try to Edit your contacts.</li>
+                <li *ngFor="let relation of relationPropertyNames">
+                  <a> 
+                    <h5 #relationRef (click)="onRelationSelect($event)" style="display:inline-block">{{relation}} </h5> 
+                    <span>({{relationCounter[relation]}})</span>  
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <hr>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-cog fa-fw" aria-hidden="true"></i> 
+                Settings <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li>
+                  <a> 
+                    <i class="fa fa-sort fa-fw" aria-hidden="true"></i> 
+                    Sort
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+      </div>   
+    </app-sidebar-menu>
+  </div> 
+  <div #contactsList class="contacts-list">
+    <div>
+      <app-contact-list [contacts]="contacts"></app-contact-list>
+    </div>
   </div>
 </div>
+
+
+  <p *ngIf="emptyContactsList" class="emptyContactsList"> Start creating new contacts by clicking the create button!</p>
+
+
+<p class="loading-spinner" *ngIf="isLoading"><i class="fa fa-spinner fa-spin"></i></p>
 
 <div class="create-contact-btn">
   <i class="fa fa-plus-square-o" title="Create new contact" (click)="onCreateClick()"></i>
@@ -60,4 +116,6 @@
 
 <div *ngIf="selectedSearchContact" class="row">
   <app-contact-search-edit [searchedContact]="selectedSearchContact"></app-contact-search-edit>
+</div>
+
 </div>
